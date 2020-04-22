@@ -17,7 +17,6 @@ const photo_get = async (req, res) => {
 const photo_post = async (req, res) => {
     console.log('photo_post', req.body, req.file);
     const inPhoto = {
-        name: req.body.name,
         filename: req.file.filename,
         caption: req.file.caption,
     };
