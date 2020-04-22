@@ -2,6 +2,8 @@
 // photoRoute
 const express = require('express');
 const router = express.Router();
+const multer = require('multer');
+const upload = multer({dest: './uploads/'});
 const photoController = require('../controllers/photoController');
 
 router.get('/', photoController.photo_list_get);

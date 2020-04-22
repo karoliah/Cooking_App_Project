@@ -4,7 +4,7 @@ const cors = require('cors');
 const express = require('express');
 const app = express();
 const port = 3000;
-const catRoute = require('./routes/photoRoute');
+const photoRoute = require('./routes/photoRoute');
 const userRoute = require('./routes/userRoute');
 
 app.use(cors());

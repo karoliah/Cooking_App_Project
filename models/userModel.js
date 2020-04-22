@@ -4,7 +4,7 @@ const promisePool = require('../database/db').promise();
 
 const getAllUsers = async () => {
   try {
-    const [rows] = await promisePool.query('SELECT user_id, name, email FROM wop_user');
+    const [rows] = await promisePool.query('SELECT id, username, name, email FROM users');
     return rows;
   } catch (e) {
     console.error('error', e.message);
@@ -13,7 +13,7 @@ const getAllUsers = async () => {
 
 const getUser = async (id) => {
   try {
-    const [rows] = await promisePool.query('SELECT user_id, name, email FROM wop_user WHERE user_id = ?', [ id ]);
+    const [rows] = await promisePool.query('SELECT id, username, name, email, avatar FROM users WHERE id = ?', [ id ]);
     return rows[0];
   } catch (e) {
     console.error('error', e.message);
@@ -23,7 +23,7 @@ const getUser = async (id) => {
 const insertUser = async (user) => {
   try {
     console.log('insert user?', user);
-    const [rows] = await promisePool.query('INSERT INTO wop_user (name, email, password) VALUES (?, ?, ?)', [ user.name, user.email, user.passwd ]);
+    const [rows] = await promisePool.query('INSERT INTO users (username, password, name, email, avatar) VALUES (?, ?, ?, ?, ?)', [ user.username, user.password, user.name, user.email, user.avatar ]);
     return rows;
   } catch (e) {
     console.error('error', e.message);
@@ -33,7 +33,7 @@ const insertUser = async (user) => {
 const updateUser = async (user) => {
   try {
     console.log('insert user?', user);
-    const [rows] = await promisePool.query('UPDATE wop_user SET name = ?, email = ?, password = ? WHERE wop_user.user_id = ?', [ user.name, user.email, user.passwd, user.id ]);
+    const [rows] = await promisePool.query('UPDATE users SET username = ?, name = ?, email = ?, password = ?, avatar = ? WHERE id = ?', [user.username, user.name, user.email, user.password, user.avatar, user.id ]);
     return rows;
   } catch (e) {
     console.error('updateUser model crash', e.message);
@@ -43,7 +43,7 @@ const updateUser = async (user) => {
 const deleteUser = async (id) => {
   try {
     console.log('delete user', id);
-    const [rows] = await promisePool.query('DELETE FROM wop_user WHERE wop_user.user_id = ?', [ id ]);
+    const [rows] = await promisePool.query('DELETE FROM users WHERE id = ?', [ id ]);
     console.log('deleted?', rows);
     return rows;
   } catch (e) {
