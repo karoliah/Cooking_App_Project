@@ -18,7 +18,8 @@ const photo_post = async (req, res) => {
     console.log('photo_post', req.body, req.file);
     const inPhoto = {
         filename: req.file.filename,
-        caption: req.file.caption,
+        owner: req.body.owner,
+        caption: req.body.caption,
     };
     try {
         const photo = await photoModel.insertPhoto(inPhoto);

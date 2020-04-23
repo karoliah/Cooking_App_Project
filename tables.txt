@@ -14,11 +14,10 @@ CREATE TABLE users (
 CREATE TABLE photos (
     id INTEGER NOT NULL AUTO_INCREMENT,
     filename text NOT NULL,
-    user_id INTEGER NOT NULL,
+    owner  INTEGER NOT NULL,
     timestamp Timestamp,
     caption VARCHAR(1000),
     PRIMARY KEY (id),
-    FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
 /* CREATE TABLE likes (
