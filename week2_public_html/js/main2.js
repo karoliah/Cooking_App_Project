@@ -2,46 +2,48 @@
 const url = 'http://localhost:3000'; // change url when uploading to server
 
 // select existing html elements
-const addForm = document.querySelector('#addCatForm');
-const modForm = document.querySelector('#modCatForm');
+const addForm = document.querySelector('#addPhotoForm');
+const modForm = document.querySelector('#modPhotoForm');
 const ul = document.querySelector('ul');
 const userLists = document.querySelectorAll('.add-owner');
 
 // create cat cards
-const createCatCards = (cats) => {
+const createPhotoCards = (photos) => {
+
   // clear ul
   ul.innerHTML = '';
-  cats.forEach((cat) => {
+  photos.forEach((photo) => {
     // create li with DOM methods
     const img = document.createElement('img');
-    img.src = url + '/' + cat.filename;
-    img.alt = cat.name;
+    img.src = url + '/' + photo.filename;
+    img.alt = photo.caption;
     img.classList.add('resp');
 
     const figure = document.createElement('figure').appendChild(img);
 
     const h2 = document.createElement('h2');
-    h2.innerHTML = cat.name;
+    h2.innerHTML = photo.caption;
 
     const p1 = document.createElement('p');
-    p1.innerHTML = `Age: ${cat.age}`;
+    p1.innerHTML = `Owner: ${photo.owner}`;
 
     const p2 = document.createElement('p');
-    p2.innerHTML = `Weight: ${cat.weight}kg`;
+    p2.innerHTML = `Caption: ${photo.caption}`;
 
-    const p3 = document.createElement('p');
-    p3.innerHTML = `Owner: ${cat.ownername}`;
+    /*const p3 = document.createElement('p');
+    p3.innerHTML = `Owner: ${photo.ownername}`;
+     */
 
     // add selected cat's values to modify form
     const modButton = document.createElement('button');
     modButton.innerHTML = 'Modify';
     modButton.addEventListener('click', () => {
       const inputs = modForm.querySelectorAll('input');
-      inputs[0].value = cat.name;
-      inputs[1].value = cat.age;
-      inputs[2].value = cat.weight;
-      inputs[3].value = cat.cat_id;
-      modForm.querySelector('select').value = cat.owner;
+      inputs[0].value = photo.caption;
+      inputs[1].value = photo.users.id;
+      inputs[2].value = photo.caption;
+      inputs[3].value = photo.id;
+      modForm.querySelector('select').value = photo.owner;
     });
 
     // delete selected cat
@@ -52,10 +54,10 @@ const createCatCards = (cats) => {
         method: 'DELETE',
       };
       try {
-        const response = await fetch(url + '/cat/' + cat.cat_id, fetchOptions);
+        const response = await fetch(url + '/photo/' + photo.id, fetchOptions);
         const json = await response.json();
         console.log('delete response', json);
-        getCat();
+        getPhoto();
       }
       catch (e) {
         console.log(e.message);
@@ -69,7 +71,7 @@ const createCatCards = (cats) => {
     li.appendChild(figure);
     li.appendChild(p1);
     li.appendChild(p2);
-    li.appendChild(p3);
+    //li.appendChild(p3);
     li.appendChild(modButton);
     li.appendChild(delButton);
     ul.appendChild(li);
@@ -77,17 +79,17 @@ const createCatCards = (cats) => {
 };
 
 // AJAX call
-const getCat = async () => {
+const getPhoto = async () => {
   try {
-    const response = await fetch(url + '/cat');
-    const cats = await response.json();
-    createCatCards(cats);
+    const response = await fetch(url + '/photo');
+    const photos = await response.json();
+    createPhotoCards(photos);
   }
   catch (e) {
     console.log(e.message);
   }
 };
-getCat();
+getPhoto();
 
 // create user options to <select>
 const createUserOptions = (users) => {
@@ -97,7 +99,7 @@ const createUserOptions = (users) => {
     users.forEach((user) => {
       // create options with DOM methods
       const option = document.createElement('option');
-      option.value = user.user_id;
+      option.value = user.users.id;
       option.innerHTML = user.name;
       option.classList.add('light-border');
       list.appendChild(option);
@@ -126,10 +128,10 @@ addForm.addEventListener('submit', async (evt) => {
     method: 'POST',
     body: fd,
   };
-  const response = await fetch(url + '/cat', fetchOptions);
+  const response = await fetch(url + '/photo', fetchOptions);
   const json = await response.json();
   console.log('add response', json);
-  getCat();
+  getPhoto();
 });
 
 // submit modify form
@@ -151,8 +153,8 @@ modForm.addEventListener('submit', async (evt) => {
   };
 
   console.log(fetchOptions);
-  const response = await fetch(url + '/cat', fetchOptions);
+  const response = await fetch(url + '/photo', fetchOptions);
   const json = await response.json();
   console.log('modify response', json);
-  getCat();
+  getPhoto();
 });

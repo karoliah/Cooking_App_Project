@@ -4,7 +4,7 @@ const promisePool = require('../database/db').promise();
 
 const getAllPhotos = async () => {
   try {
-    const [rows] = await promisePool.query('SELECT photos.id, filename, owner, timestamp, users.id users.name AS ownername FROM photos LEFT JOIN users ON owner = users.id');
+    const [rows] = await promisePool.query('SELECT photos.id, filename, owner, caption, timestamp, users.id, users.name AS ownername FROM photos LEFT JOIN users ON owner = users.id');
     return rows;
   } catch (e) {
     console.error('error', e.message);
@@ -13,7 +13,7 @@ const getAllPhotos = async () => {
 
 const getPhoto = async (id) => {
   try {
-    const [rows] = await promisePool.query('SELECT * FROM photos WHERE id = ?', [ id ]);
+    const [rows] = await promisePool.query('SELECT * FROM photos WHERE photos.id = ?', [ id ]);
     return rows[0];
   } catch (e) {
     console.error('error', e.message);
