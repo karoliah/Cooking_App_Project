@@ -32,20 +32,22 @@ const createPhotoCards = (photos) => {
     p2.innerHTML = `Caption: ${photo.caption}`;
 
     /*const p3 = document.createElement('p');
-    p3.innerHTML = `Owner: ${photo.ownername}`;
-     */
+    p3.innerHTML = `${photo.timestamp}`;
+*/
+
+
 
     // add selected photo's values to modify form
-    /*const modButton = document.createElement('button');
+    const modButton = document.createElement('button');
     modButton.innerHTML = 'Modify';
     modButton.addEventListener('click', () => {
       const inputs = modForm.querySelectorAll('input');
-      inputs[0].value = photo.caption;
-      inputs[1].value = photo.id;
+      inputs[0].value = photo.ownername;
+      inputs[1].value = user.id;
       inputs[2].value = photo.caption;
-      inputs[3].value = photo.id;
+      //inputs[3].value = photo.id;
       modForm.querySelector('select').value = photo.owner;
-    });*/
+    });
 
     // delete selected photo
     const delButton = document.createElement('button');
@@ -55,7 +57,7 @@ const createPhotoCards = (photos) => {
         method: 'DELETE',
       };
       try {
-        const response = await fetch(url + '/photo/' + photo.id, fetchOptions);
+        const response = await fetch(url + '/photo/' + photos.id, fetchOptions);
         const json = await response.json();
         console.log('delete response', json);
         getPhoto();
@@ -74,7 +76,7 @@ const createPhotoCards = (photos) => {
     li.appendChild(p2);
     //li.appendChild(p3);
     //li.appendChild(modButton);
-    li.appendChild(delButton);
+    //li.appendChild(delButton);
     ul.appendChild(li);
   });
 };

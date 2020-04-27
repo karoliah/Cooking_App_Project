@@ -33,7 +33,7 @@ const insertPhoto = async (photo) => {
 const updatePhoto = async (photo) => {
   try {
     console.log('insert photo?', photo);
-    const [rows] = await promisePool.query('UPDATE photos SET caption = ? WHERE id = ?', [ photo.caption, photo.id ]);
+    const [rows] = await promisePool.query('UPDATE photos SET caption = ? WHERE photos.id = ?', [ photo.caption, photo.id ]);
     return rows;
   } catch (e) {
     console.error('updatePhoto model crash', e.message);
