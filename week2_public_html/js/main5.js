@@ -135,7 +135,7 @@ const createUserOptions = (users) => {
     users.forEach((user) => {
       // create options with DOM methods
       const option = document.createElement('option');
-      option.value = user.user_id;
+      option.value = user.id;
       option.innerHTML = user.name;
       option.classList.add('light-border');
       list.appendChild(option);

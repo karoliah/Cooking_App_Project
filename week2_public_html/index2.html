@@ -15,7 +15,7 @@
     <div class="forms">
         <div class="form-wrapper">
             <h3>Add user</h3>
-            <form action="http://localhost:3000/user" method="post" class="light-border" id="addUserForm">
+            <form action="http://localhost:3000/auth/register" method="post" class="light-border" id="addUserForm" enctype="multipart/form-data">
                 <input class="light-border" type="text" name="username" pattern=".{3,}" placeholder="Username" required>
                 <input class="light-border" type="password" name="password" pattern="(?=.*[A-Z]).{8,}" placeholder="Password" required>
                 <input class="light-border" type="text" name="name" pattern=".{3,}" placeholder="Name" required>

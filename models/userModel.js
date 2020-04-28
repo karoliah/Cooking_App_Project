@@ -23,7 +23,7 @@ const getUser = async (id) => {
 const insertUser = async (user) => {
   try {
     console.log('insert user?', user);
-    const [rows] = await promisePool.query('INSERT INTO users (username, password, name, email, avatar) VALUES (?, ?, ?, ?, ?)', [ user.username, user.password, user.name, user.email, user.avatar ]);
+    const [rows] = await promisePool.query('INSERT INTO users (username, password, name, email, avatar) VALUES (?, ?, ?, ?, ?)',  user);
     return rows;
   } catch (e) {
     console.error('error', e.message);
@@ -55,7 +55,7 @@ const getUserLogin = async (params) => {
   try {
     console.log(params);
     const [rows] = await promisePool.execute(
-        'SELECT * FROM users WHERE email = ?;',
+        'SELECT * FROM users WHERE username = ?;',
         params);
     return rows;
   } catch (e) {

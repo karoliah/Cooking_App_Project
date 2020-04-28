@@ -17,7 +17,7 @@ app.use(express.static('public'));
 app.use(express.static('uploads'));
 
 app.use('/auth', authRoute);
-app.use('/photo', passport.authenticate('jwt', {session: false}), photoRoute);
-app.use('/user', passport.authenticate('jwt', {session: false}), userRoute);
+app.use('/photo',  photoRoute); //passport.authenticate('jwt', {session: false}),
+app.use('/user', userRoute); //passport.authenticate('jwt', {session: false}),
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));

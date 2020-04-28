@@ -34,19 +34,23 @@ const login = (req, res) => {
 const user_create_post = async (req, res, next) => {
     // Extract the validation errors from a request.
     const errors = validationResult(req); // TODO require validationResult, see userController
+    console.log('37', req.file);
 
     if (!errors.isEmpty()) {
         console.log('user create error', errors);
         res.send(errors.array());
     } else {
         // TODO: bcrypt password
+        // TODO: bcrypt password
         const salt = bcrypt.genSaltSync(15);
         const hash = bcrypt.hashSync(req.body.password, salt);
 
         const params = [
-            req.body.name,
             req.body.username,
             hash, // TODO: save hash instead of the actual password
+            req.body.name,
+            req.body.email,
+            req.file.filename
         ];
 
         if (await userModel.insertUser(params)) {
