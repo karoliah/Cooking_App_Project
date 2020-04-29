@@ -226,7 +226,7 @@ loginForm.addEventListener('submit', async (evt) => {
     loginWrapper.style.display = 'none';
     logOut.style.display = 'block';
     main.style.display = 'block';
-    userInfo.innerHTML = `Hello ${json.user.name}`;
+    userInfo.innerHTML = `${json.user.name}`;
     getPhoto();
     getUsers();
   }
@@ -277,7 +277,7 @@ addUserForm.addEventListener('submit', async (evt) => {
   loginWrapper.style.display = 'none';
   logOut.style.display = 'block';
   main.style.display = 'block';
-  userInfo.innerHTML = `Hello ${json.user.name}`;
+  userInfo.innerHTML = `${json.user.name}`;
   getPhoto();
   getUsers();
 });
