@@ -62,6 +62,7 @@ const createPhotoCards = (photos) => {
 
     // add selected photo's values to modify form
     const modButton = document.createElement('button');
+    modButton.className = 'light-border';
     modButton.innerHTML = 'Modify';
     modButton.addEventListener('click', () => {
       const inputs = modForm.querySelectorAll('input');
@@ -74,6 +75,7 @@ const createPhotoCards = (photos) => {
 
     // delete selected cat
     const delButton = document.createElement('button');
+    delButton.className = 'light-border';
     delButton.innerHTML = 'Delete';
     delButton.addEventListener('click', async () => {
       const fetchOptions = {

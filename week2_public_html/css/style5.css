@@ -169,8 +169,13 @@ h3{
    */
 }
 
-#log-out,button {
-  width 100%;
+img{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 30%;
+  width: 35%;
+  height: 35%;
 }
 
 
