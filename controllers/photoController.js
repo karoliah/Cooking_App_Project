@@ -6,7 +6,7 @@ const imageMeta = require('../utils/imageMeta');
 const photos = photoModel.photos;
 
 const photo_list_get = async (req, res) => {
-    console.log('rivi 7', req.user);
+    console.log('rivi 7', req.user)
     const photos = await photoModel.getAllPhotos(req.user.id);
     res.json(photos);
 };
@@ -18,7 +18,6 @@ const photo_get = async (req, res) => {
 };
 
 const photo_post = async (req, res) => {
-
     try {
         console.log('photo_post', req.body, req.file);
 
