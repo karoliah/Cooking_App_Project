@@ -7,7 +7,7 @@ const userInfo = document.querySelector('#user-info');
 const logOut = document.querySelector('#log-out');
 const main = document.querySelector('main');
 const loginForm = document.querySelector('#login-form');
-const addUserForm = document.querySelector('#add-user-form');
+const addUserForm = document.querySelector('#addUserForm');
 const addForm = document.querySelector('#add-photo-form');
 const modForm = document.querySelector('#mod-photo-form');
 const ul = document.querySelector('ul');
@@ -22,8 +22,11 @@ const createPhotoCards = (photos) => {
   ul.innerHTML = '';
   photos.forEach((photo) => {
     // create li with DOM methods
+
+    console.log(photo);
+
     const img = document.createElement('img');
-    //img.src = url + '/thumbnails/' + photo.filename;
+    img.src = url + '/thumbnails/' + photo.filename;
     img.src = url + '/' + photo.filename;
     img.alt = photo.id;
     img.classList.add('resp');
@@ -50,30 +53,29 @@ const createPhotoCards = (photos) => {
      */
 
     const p1 = document.createElement('p');
-    p1.innerHTML = `User: ${photo.age}`;
+    p1.innerHTML = `User: ${photo.ownername}`;
 
     const p2 = document.createElement('p');
     p2.innerHTML = `Caption: ${photo.caption}`;
 
-    /*const p3 = document.createElement('p');
-    p3.innerHTML = `Owner: ${cat.ownername}`;
+    //const avatar = document.createElement('figure').appendChild(img);;
+    //avatar.innerHTML = `Owner: ${user.avatar}`;
 
-     */
-
-    // add selected photo's values to modify form
+     
+    
+      // add selected photo's values to modify form
     const modButton = document.createElement('button');
     modButton.className = 'light-border';
     modButton.innerHTML = 'Modify';
     modButton.addEventListener('click', () => {
       const inputs = modForm.querySelectorAll('input');
       inputs[0].value = photo.ownername;
-      inputs[1].value = user.id;
-      inputs[2].value = photo.caption;
-      //inputs[3].value = cat.cat_id;
-      modForm.querySelector('select').value = photo.owner;
+      inputs[1].value = photo.caption;
+      inputs[2].value = photo.id;
+      //modForm.querySelector('select').value = photo.owner;
     });
 
-    // delete selected cat
+    // delete selected photo
     const delButton = document.createElement('button');
     delButton.className = 'light-border';
     delButton.innerHTML = 'Delete';
@@ -85,16 +87,19 @@ const createPhotoCards = (photos) => {
         },
       };
       try {
-        const response = await fetch(url + '/photo/' + user.id, fetchOptions);
+        const response = await fetch(url + '/photo/' + photo.id, fetchOptions);
         const json = await response.json();
         console.log('delete response', json);
         getPhoto();
       }
       catch (e) {
-        console.log(e.message());
+        console.log(e.message);
       }
     });
 
+
+     
+  
     const li = document.createElement('li');
     li.classList.add('light-border');
 
@@ -102,9 +107,11 @@ const createPhotoCards = (photos) => {
     li.appendChild(figure);
     li.appendChild(p1);
     li.appendChild(p2);
-    //li.appendChild(p3);
+    //li.appendChild(avatar);
+    if (photo.editable) {
     li.appendChild(modButton);
     li.appendChild(delButton);
+    }
     ul.appendChild(li);
   });
 };
@@ -187,6 +194,7 @@ addForm.addEventListener('submit', async (evt) => {
 // submit modify form
 modForm.addEventListener('submit', async (evt) => {
   evt.preventDefault();
+
   const data = serializeJson(modForm);
   const fetchOptions = {
     method: 'PUT',
@@ -224,15 +232,29 @@ loginForm.addEventListener('submit', async (evt) => {
   } else {
     // save token
     sessionStorage.setItem('token', json.token);
+    sessionStorage.setItem('user', JSON.stringify(json.user));
     // show/hide forms + photos
     loginWrapper.style.display = 'none';
     logOut.style.display = 'block';
     main.style.display = 'block';
-    userInfo.innerHTML = `${json.user.name}`;
+    setUser();
     getPhoto();
     getUsers();
   }
 });
+
+const setUser = () => {
+  try {
+    const user = JSON.parse(sessionStorage.getItem('user'))
+    userInfo.innerHTML = `${user.name} <img src="${url}/${user.avatar}">`;
+
+  } catch(e) {
+
+  }
+
+};
+
+setUser();
 
 // logout
 logOut.addEventListener('click', async (evt) => {

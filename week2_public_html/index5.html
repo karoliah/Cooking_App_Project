@@ -9,23 +9,21 @@
   <link href="./css/style5.css" rel="stylesheet">
 </head>
 <body>
-<img src="../logo/logoo (1).png" height="374" width="940" id="logo"/>
+<img id="image" src="../logo/logoo (1).png" height="374" width="940" id="image"/>
 <div class="container">
   <div class="forms" id="login-wrapper">
     <div class="form-wrapper">
       <h3>Login</h3>
       <form id="login-form" class="light-border">
-        <div>
+
           <label>Username:</label>
           <input class="light-border" type="text" name="username"/>
-        </div>
-        <div>
+ 
           <label>Password:</label>
           <input class="light-border" type="password" name="password"/>
-        </div>
-        <div>
+
           <button class="light-border" type="submit">Log In</button>
-        </div>
+
       </form>
     </div>
     <div class="form-wrapper" id="reg">
@@ -52,10 +50,10 @@
       </form>
     </div>
   </div>
-  <header id="log-out" style="display: none;">
+  <header id="log-out" style="...">
     <p id="user-info"></p>
     <button class="light-border">Log out</button>
-  </header>
+    </header>
   <main style="display: none">
     <!--<h1>List of photos</h1>-->
     <ul>
@@ -82,16 +80,11 @@
         <h3>Modify photo</h3>
         <form id="mod-photo-form" class="light-border">
           <input class="light-border" type="text" name="name" placeholder="Name" required>
-          <input class="light-border" type="number" name="age" placeholder="Age" required>
           <input class="light-border"
-                 type="number"
-                 step="0.1"
-                 name="weight"
-                 placeholder="Weight"
+                 type="text"
+                 name="caption"
+                 placeholder="Caption"
                  required>
-          <select class="light-border add-owner" name="owner" required>
-            <option value="">Select owner</option>
-          </select>
           <input type="hidden" name="id">
           <button class="light-border" type="submit">Save</button>
         </form>

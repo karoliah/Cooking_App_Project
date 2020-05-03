@@ -34,7 +34,7 @@ const login = (req, res) => {
 const user_create_post = async (req, res, next) => {
     // Extract the validation errors from a request.
     const errors = validationResult(req); // TODO require validationResult, see userController
-    console.log('37', req.file);
+    //console.log('37', req.file);
 
     if (!errors.isEmpty()) {
         console.log('user create error', errors);
@@ -50,8 +50,10 @@ const user_create_post = async (req, res, next) => {
             hash, // TODO: save hash instead of the actual password
             req.body.name,
             req.body.email,
-            req.file.filename
+            req.file.filename,
         ];
+
+        console.log(params);
 
         if (await userModel.insertUser(params)) {
             next();
