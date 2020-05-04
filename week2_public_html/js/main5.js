@@ -67,11 +67,11 @@ const createPhotoCards = (photos) => {
     editButton.className = 'light-border';
     editButton.innerHTML = 'Edit';
     editButton.addEventListener('click', () => {
-      const inputs = ediForm.querySelectorAll('input');
-      const textarea = ediForm.querySelectorAll('textarea');
+      const inputs = ediForm.querySelector('input');
+      const texarea = ediForm.querySelector('textarea');
       //inputs[0].value = photo.ownername;
-      inputs[0].value = textarea.caption;//photo.caption; //textarea.value
-      inputs[1].value = photo.id;
+      texarea.value = photo.caption;
+      inputs.value = photo.id;
       //ediForm.querySelector('select').value = photo.owner;
       scrollToTop();
     });
