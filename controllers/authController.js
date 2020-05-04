@@ -50,11 +50,11 @@ const user_create_post = async (req, res, next) => {
             hash, // TODO: save hash instead of the actual password
             req.body.name,
             req.body.email,
-            req.file.filename,
+            req.file.filename
         ];
 
         if (await userModel.insertUser(params)) {
-            next();
+            res.status(400).json({message: 'user added'});
         } else {
             res.status(400).json({error: 'register error'});
         }
