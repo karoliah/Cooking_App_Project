@@ -58,7 +58,9 @@
         <form class="light-border" enctype="multipart/form-data" id="add-photo-form">
           <input class="light-border" type="file" name="photo" accept="image/*" placeholder="Choose file">
           <select class="light-border add-owner" name="owner" required></select>
-          <input class="light-border" type="text" name="caption" placeholder="Caption" required>
+          <!--<input class="light-border" type="textarea" name="caption" placeholder="Caption" required>-->
+          <textarea class="light-border" type="textarea" name="caption" placeholder="Caption" required>
+          </textarea>
           <button class="light-border" type="submit">Upload</button>
         </form>
       </div>

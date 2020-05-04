@@ -22,6 +22,7 @@ const photo_post = async (req, res) => {
         console.log('photo_post', req.body, req.file);
 
         const thumb = await makeThumbnail(req.file.path, '../thumbnails'+req.file.filename);
+        console.log(thumb);
 
         const coords = await imageMeta.getCoordinates(req.file.path);
         console.log('coords', coords);
