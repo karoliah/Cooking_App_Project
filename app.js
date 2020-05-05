@@ -17,14 +17,14 @@ if (process.env.NODE_ENV === 'production') {
     require('./remote')(app, port);
 } else {
     require('./localhost')(app, port);
-}
+
 app.use(express.static('public'));
 app.use(express.static('uploads'));
 app.use('/thumbnails', express.static('thumbnails'));
 
-app.use('/app', authRoute);
-app.use('/app', passport.authenticate('jwt', {session: false}), photoRoute); //passport.authenticate('jwt', {session: false}),
-app.use('/app',  passport.authenticate('jwt', {session: false}), userRoute); //passport.authenticate('jwt', {session: false}),
+app.use('/auth', authRoute);
+app.use('/photo', passport.authenticate('jwt', {session: false}), photoRoute); //passport.authenticate('jwt', {session: false}),
+app.use('/user',  passport.authenticate('jwt', {session: false}), userRoute); //passport.authenticate('jwt', {session: false}),
 
 //app.listen(port, () => console.log(`Example app listening on port ${port}!`));
 
