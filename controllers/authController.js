@@ -32,7 +32,7 @@ const login = (req, res) => {
 };
 
 const user_create_post = async (req, res, next) => {
-    // Extract the validation errors from a request.
+    // Extract the validation errors from a request
     const errors = validationResult(req); // TODO require validationResult, see userController
     console.log('37', req.file);
 

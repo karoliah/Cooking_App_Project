@@ -38,6 +38,7 @@ const createPhotoCards = (photos) => {
       imageModal.classList.toggle('hide');
       try {
         const coords = JSON.parse(photo.coords);
+        // console.log(coords);
         addMarker(coords);
       }
       catch (e) {
@@ -59,7 +60,6 @@ const createPhotoCards = (photos) => {
     editButton.addEventListener('click', () => {
       const inputs = ediForm.querySelector('input');
       const texarea = ediForm.querySelector('textarea');
-
       texarea.value = photo.caption;
       inputs.value = photo.id;
       scrollToTop();
@@ -86,9 +86,13 @@ const createPhotoCards = (photos) => {
         console.log(e.message);
       }
     });
+
+
+     
   
     const li = document.createElement('li');
     li.classList.add('light-border');
+
 
     li.appendChild(figure);
     li.appendChild(p1);
@@ -101,33 +105,33 @@ const createPhotoCards = (photos) => {
   });
 };
 
-const mybutton = document.getElementById('top-button');
+    const mybutton = document.getElementById('top-button');
 
-//appears to the bottom if scrolled down to 500px
-const scrollFunc = () => {
-  if (document.body.scrollTop > 500 || document.documentElement.scrollTop > 500) {
-    mybutton.style.display = 'block';
-  } else {
-    mybutton.style.display = 'none';
-  }
-};
+    //appears to the bottom if scrolled down to 500px 
+    const scrollFunc = () => {
+      if (document.body.scrollTop > 500 || document.documentElement.scrollTop > 500) {
+        mybutton.style.display = 'block';
+      } else {
+        mybutton.style.display = 'none';
+      }
+    };
+    
+    window.addEventListener('scroll', scrollFunc);
+    
+    const scrollToTop = () => {
 
-window.addEventListener('scroll', scrollFunc);
-
-const scrollToTop = () => {
-
-  const c = document.documentElement.scrollTop || document.body.scrollTop;
-  if (c > 0) {
-    window.requestAnimationFrame(scrollToTop);
-    window.scrollTo(0, c - c / 10);
-  }
-};
-
-//when the button is clicked, runs scrollToTop function
-mybutton.onclick = function(e) {
-  e.preventDefault();
-  scrollToTop();
-};
+      const c = document.documentElement.scrollTop || document.body.scrollTop;
+      if (c > 0) {
+        window.requestAnimationFrame(scrollToTop);
+        window.scrollTo(0, c - c / 10);
+      }
+    };
+    
+    //when the button is clicked, runs scrollToTop function
+    mybutton.onclick = function(e) {
+      e.preventDefault();
+      scrollToTop();
+    }    
 
 
 // close modal
@@ -261,9 +265,11 @@ const setUser = () => {
   try {
     const user = JSON.parse(sessionStorage.getItem('user'));
     userInfo.innerHTML = `${user.name} <img src="${url}/${user.avatar}">`;
+
   } catch(e) {
 
   }
+
 };
 
 setUser();
@@ -308,7 +314,7 @@ addUserForm.addEventListener('submit', async (evt) => {
   alert('Rekisteröinti ok');
 });
 
-// when app starts, check if token exists and hide login form, show logout button and main content, get cats and users
+// when app starts, check if token exists and hide login form, show logout button and main content, get photos and users
 if (sessionStorage.getItem('token')) {
   loginWrapper.style.display = 'none';
   logOut.style.display = 'block';
