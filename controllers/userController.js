@@ -1,6 +1,5 @@
 'use strict';
 const userModel = require('../models/userModel');
-
 const users = userModel.users;
 
 const user_list_get = async (req, res) => {

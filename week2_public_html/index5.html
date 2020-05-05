@@ -4,6 +4,23 @@
   <meta charset="utf8">
   <title>Example</title>
   <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v1.5.0/mapbox-gl.css" rel="stylesheet"/>
+  <script src="https://cdn.tiny.cloud/1/tyouvrkjj0rlhiu9mzsqiwme0eaukguyfasal246f61vbg6n/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+
+  <script>
+    tinymce.init({
+      selector: '#textarea',
+      toolbar: false,
+      menubar: false,
+      statusbar: false,
+      content_style: 'body { font-size: 13px }',
+      allow_conditional_comments: true,
+      setup: function (editor) {
+        editor.on('change', function () {
+          editor.save();
+        });
+      }
+    });
+  </script>
   <link href='https://fonts.googleapis.com/css?family=Manrope' rel='stylesheet'>
   <link href='https://fonts.googleapis.com/css?family=East Sea Dokdo' rel='stylesheet'>
   <link href="./css/style5.css" rel="stylesheet">
@@ -28,7 +45,6 @@
     </div>
     <div class="form-wrapper" id="reg">
       <h3>Register</h3>
-      <!--<form class="light-border" id="add-user-form">-->
       <form action="http://localhost:3000/auth/register" method="post" class="light-border2" id="addUserForm" enctype="multipart/form-data">
         <label>Username:</label>
         <input class="light-border2" type="text" name="username" pattern=".{3,}" required>
@@ -49,7 +65,6 @@
     <button id="log-out" class="light-border" style="display: none;">Logout</button>
   <main style="display: none">
     <!--<h1>List of photos</h1>-->
-    <!--hr-->
     
     <div class="maincontainer">
     <div class="forms">
@@ -58,9 +73,7 @@
         <form class="light-border" enctype="multipart/form-data" id="add-photo-form">
           <input class="light-border" type="file" name="photo" accept="image/*" placeholder="Choose file">
           <select class="light-border add-owner" name="owner" required></select>
-          <!--<input class="light-border" type="textarea" name="caption" placeholder="Caption" required>-->
-          <textarea class="light-border" type="textarea" name="caption" placeholder="Caption" required>
-          </textarea>
+          <textarea class="textarea" class="light-border" rows="5" type="textarea" name="caption" placeholder="Caption" required></textarea>
           <button class="light-border" type="submit">Upload</button>
         </form>
       </div>
@@ -68,10 +81,7 @@
       <div class="form-wrapper">
         <h3>Edit caption</h3>
         <form id="edit-photo-form" class="light-border">
-          <!--input class="light-border" type="text" name="name" placeholder="Name" required-->
-          <textarea class="light-border" type="text" name="caption" placeholder="Caption" required>
-          </textarea>
-          <!--<input class="light-border" type="text" name="caption" placeholder="Caption" required>-->
+          <textarea class="textarea" class="light-border" rows="5" type="textarea" name="caption" placeholder="Caption" required></textarea>
           <input type="hidden" name="id">
           <button class="light-border" type="submit">Save</button>
         </form>
@@ -80,8 +90,7 @@
     </div>
     <br>
     <hr>
-    
-    <!--div class="progress-bar" id="myBar"></div-->
+
     <div class="container">
 
     <ul>

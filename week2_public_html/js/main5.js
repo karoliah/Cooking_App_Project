@@ -38,7 +38,6 @@ const createPhotoCards = (photos) => {
       imageModal.classList.toggle('hide');
       try {
         const coords = JSON.parse(photo.coords);
-        // console.log(coords);
         addMarker(coords);
       }
       catch (e) {
@@ -47,21 +46,12 @@ const createPhotoCards = (photos) => {
 
     const figure = document.createElement('figure').appendChild(img);
 
-    /*const h2 = document.createElement('h2');
-    h2.innerHTML = cat.name;
-     */
-
     const p1 = document.createElement('p');
     p1.innerHTML = `From: ${photo.ownername}`;
 
     const p2 = document.createElement('p');
     p2.innerHTML = `${photo.caption}`;
 
-    /*const p3 = document.createElement('p');
-    p3.innerHTML = `Owner: ${cat.ownername}`;
-
-     */
-    
       // add selected photo's values to modify form
     const editButton = document.createElement('button');
     editButton.className = 'light-border';
@@ -69,10 +59,9 @@ const createPhotoCards = (photos) => {
     editButton.addEventListener('click', () => {
       const inputs = ediForm.querySelector('input');
       const texarea = ediForm.querySelector('textarea');
-      //inputs[0].value = photo.ownername;
+
       texarea.value = photo.caption;
       inputs.value = photo.id;
-      //ediForm.querySelector('select').value = photo.owner;
       scrollToTop();
     });
 
@@ -97,18 +86,13 @@ const createPhotoCards = (photos) => {
         console.log(e.message);
       }
     });
-
-
-     
   
     const li = document.createElement('li');
     li.classList.add('light-border');
 
-    //li.appendChild(h2);
     li.appendChild(figure);
     li.appendChild(p1);
     li.appendChild(p2);
-    //li.appendChild(p3);
     if (photo.editable) {
     li.appendChild(editButton);
     li.appendChild(delButton);
@@ -117,42 +101,33 @@ const createPhotoCards = (photos) => {
   });
 };
 
-// progress bar as a hr
-    /*let bar = document.querySelector('.progress-bar');
-    window.addEventListener('scroll', () => {
-        let max = document.body.scrollHeight - innerHeight;
-        bar.style.width = `${(pageYOffset / max) * 100}%`;
-    });*/
+const mybutton = document.getElementById('top-button');
 
-    const mybutton = document.getElementById('top-button');
+//appears to the bottom if scrolled down to 500px
+const scrollFunc = () => {
+  if (document.body.scrollTop > 500 || document.documentElement.scrollTop > 500) {
+    mybutton.style.display = 'block';
+  } else {
+    mybutton.style.display = 'none';
+  }
+};
 
-    //appears to the bottom if scrolled down to 500px 
-    const scrollFunc = () => {
-      if (document.body.scrollTop > 500 || document.documentElement.scrollTop > 500) {
-        mybutton.style.display = 'block';
-      } else {
-        mybutton.style.display = 'none';
-      }
-    };
-    
-    window.addEventListener('scroll', scrollFunc);
-    
-    const scrollToTop = () => {
+window.addEventListener('scroll', scrollFunc);
 
-      const c = document.documentElement.scrollTop || document.body.scrollTop;
-      if (c > 0) {
-        window.requestAnimationFrame(scrollToTop);
-        // scrollTotop takes x and a y coordinates
-        // increases the '10' value to get a smoother scroll
-        window.scrollTo(0, c - c / 10);
-      }
-    };
-    
-    //when the button is clicked, runs scrollToTop function
-    mybutton.onclick = function(e) {
-      e.preventDefault();
-      scrollToTop();
-    }    
+const scrollToTop = () => {
+
+  const c = document.documentElement.scrollTop || document.body.scrollTop;
+  if (c > 0) {
+    window.requestAnimationFrame(scrollToTop);
+    window.scrollTo(0, c - c / 10);
+  }
+};
+
+//when the button is clicked, runs scrollToTop function
+mybutton.onclick = function(e) {
+  e.preventDefault();
+  scrollToTop();
+};
 
 
 // close modal
@@ -286,11 +261,9 @@ const setUser = () => {
   try {
     const user = JSON.parse(sessionStorage.getItem('user'));
     userInfo.innerHTML = `${user.name} <img src="${url}/${user.avatar}">`;
-
   } catch(e) {
 
   }
-
 };
 
 setUser();
@@ -331,7 +304,7 @@ addUserForm.addEventListener('submit', async (evt) => {
   const response = await fetch(url + '/auth/register', fetchOptions);
   const json = await response.json();
   console.log('user add response', json);
-  //mitä haluan että tapahtuu rekisteröinnin jälkeen
+  // do after register
   alert('Rekisteröinti ok');
 });
 

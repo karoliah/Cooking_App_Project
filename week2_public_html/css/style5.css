@@ -16,13 +16,6 @@ body {
   padding: 1em;
 }
 
-/*.progress-bar {
-  height: 2px;
-  width: 0%;
-  border-top: 1px solid rgba(255, 146, 52, 0.568);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-}*/
-
 hr {
   border: 0;
   height: 0;
@@ -83,9 +76,6 @@ figure {
   align-items: center;
   background-color: white;
   position: relative;
-  /*border-radius: 40px;
-  border: 2px solid #ffcd3c;
-   */
 }
 
 .mainforms {
@@ -94,9 +84,6 @@ figure {
   align-content: space-between;
   background-color: white;
   position: relative;
-  /*border-radius: 40px;
-  border: 2px solid #ffcd3c;
-   */
 }
 
 .form-wrapper {
@@ -119,9 +106,7 @@ button, select {
   display: inline-block;
   width: 100%;
   margin: 0.5em auto;
-  
 }
-
 
 select {
   line-height: 1.5em;
@@ -183,7 +168,6 @@ button{
 }
 
 h1{
-
   margin: 50px;
   display: flex;
   justify-content: center;
@@ -221,10 +205,9 @@ h3{
   font-size: 0.8em;
   width: auto;
   border: none;
-  
-  }
+}
 
-  #user-info {
+#user-info{
   padding: 5px;
   position: absolute;
   top: 40px;
@@ -232,18 +215,12 @@ h3{
   font-size: 0.8em;
   flex-direction: column;
   align-content: center;
-  }
-
-  /*text-align: right;
-  justify-content: right;
-
-   */
+}
 
 img{
   display:flex;
   justify-content: center;
   align-items: center;
-
 }
 
 #image{
@@ -264,17 +241,17 @@ textarea{
 
 #user-info{
   width: 200px;
-  lenght: 50px;
+  height: 50px;
 }
 
 a:link, a:visited {
-  color: darkcyan;
+  color: #35d0ba;
 }
 
 a:hover, a:active {
-  color: cornflowerblue;
+  color: darkturquoise;
 }
 
 button:hover {
-  background-color: lightblue
+  background-color: paleturquoise;
 }
