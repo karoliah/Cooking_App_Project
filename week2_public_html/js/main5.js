@@ -105,33 +105,33 @@ const createPhotoCards = (photos) => {
   });
 };
 
-    const mybutton = document.getElementById('top-button');
+const mybutton = document.getElementById('top-button');
 
-    //appears to the bottom if scrolled down to 500px 
-    const scrollFunc = () => {
-      if (document.body.scrollTop > 500 || document.documentElement.scrollTop > 500) {
-        mybutton.style.display = 'block';
-      } else {
-        mybutton.style.display = 'none';
-      }
-    };
-    
-    window.addEventListener('scroll', scrollFunc);
-    
-    const scrollToTop = () => {
+//appears to the bottom if scrolled down to 500px
+const scrollFunc = () => {
+  if (document.body.scrollTop > 500 || document.documentElement.scrollTop > 500) {
+    mybutton.style.display = 'block';
+  } else {
+    mybutton.style.display = 'none';
+  }
+};
 
-      const c = document.documentElement.scrollTop || document.body.scrollTop;
-      if (c > 0) {
-        window.requestAnimationFrame(scrollToTop);
-        window.scrollTo(0, c - c / 10);
-      }
-    };
-    
-    //when the button is clicked, runs scrollToTop function
-    mybutton.onclick = function(e) {
-      e.preventDefault();
-      scrollToTop();
-    }    
+window.addEventListener('scroll', scrollFunc);
+
+const scrollToTop = () => {
+
+  const c = document.documentElement.scrollTop || document.body.scrollTop;
+  if (c > 0) {
+    window.requestAnimationFrame(scrollToTop);
+    window.scrollTo(0, c - c / 10);
+  }
+};
+
+//when the button is clicked, runs scrollToTop function
+mybutton.onclick = function(e) {
+  e.preventDefault();
+  scrollToTop();
+};
 
 
 // close modal
@@ -159,20 +159,14 @@ const getPhoto = async () => {
   }
 };
 
-// create user options to <select>
-const createUserOptions = (users) => {
-  userLists.forEach((list) => {
-    // clear user list
-    list.innerHTML = '';
-    users.forEach((user) => {
-      // create options with DOM methods
-      const option = document.createElement('option');
-      option.value = user.id;
-      option.innerHTML = user.name;
+// only login user can add pictures with own name
+const createUserOptions = () => {
+      const user = document.getElementById('user');
+      const thisIsUser = JSON.parse(sessionStorage.getItem('user'));
+      user.value = thisIsUser.id;
+      user.innerHTML = user.name;
       option.classList.add('light-border');
-      list.appendChild(option);
-    });
-  });
+      appendChild(user);
 };
 
 // get users to form options
@@ -185,7 +179,7 @@ const getUsers = async () => {
     };
     const response = await fetch(url + '/user', options);
     const users = await response.json();
-    createUserOptions(users);
+    createUserOptions();
   }
   catch (e) {
     console.log(e.message);

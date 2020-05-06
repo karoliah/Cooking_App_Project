@@ -74,7 +74,7 @@
         <h3>Add photo</h3>
         <form class="light-border" enctype="multipart/form-data" id="add-photo-form">
           <input class="light-border" type="file" name="photo" accept="image/*" placeholder="Choose file">
-          <select class="light-border add-owner" name="owner" required></select>
+          <input type="hidden" id="user" class="light-border add-owner" name="owner" required></input>
           <textarea id="textarea" class="light-border" rows="5" type="textarea" name="caption" placeholder="Caption" required></textarea>
           <button class="light-border" type="submit">Upload</button>
         </form>
